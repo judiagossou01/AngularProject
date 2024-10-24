@@ -1,0 +1,15 @@
+<h1>Register Form</h1>
+<form [formGroup]="form" (submit)="submit($event)">
+  <div>
+    <input type="text" placeholder="Name" formControlName="name">
+  </div>
+  <div>
+    <input type="email" placeholder="Email" formControlName="email">
+  </div>
+  <div>
+    <input type="password" placeholder="Password" formControlName="password">
+  </div>
+  <div>
+    <button type="submit">Sign Up</button>
+  </div>
+</form>
