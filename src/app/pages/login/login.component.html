@@ -1,1 +1,17 @@
-<p>login works!</p>
+<h1>Login Form</h1>
+<form [formGroup]="loginformGroup" (submit)="login()">
+    <div class="form-field">
+        <input formControlName="email" type="email" placeholder="Email"
+            [class.is-invalid]="isInvalidAndTouchedOrDirty('email')">
+        <div class="text-error" *ngIf="isInvalidAndTouchedOrDirty('email')">
+            {{ getMessageError('email') }}</div>
+    </div>
+    <div class="form-field">
+        <input formControlName="password" type="password" placeholder="Password"
+            [class.is-invalid]="isInvalidAndTouchedOrDirty('password')">
+        <div class="text-error" *ngIf="isInvalidAndTouchedOrDirty('password')">{{ getMessageError('password') }}</div>
+    </div>
+    <div class="form-field">
+        <button type="submit">Sign In</button>
+    </div>
+</form>
