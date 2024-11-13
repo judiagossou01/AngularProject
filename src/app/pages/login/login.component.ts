@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { AuthService, LoginCredentials } from '../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +12,10 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  http = inject(HttpClient)
   fb = inject(FormBuilder)
+
+  private authService = inject(AuthService)
 
   private capitalize(field: string): string {
     return field.charAt(0).toUpperCase() + field.slice(1);
@@ -46,6 +51,15 @@ export class LoginComponent {
     if (this.loginformGroup.invalid) {
       return;
     }
-    console.log(this.loginformGroup.value)
+
+    const loginData = { ...this.loginformGroup.value }
+    this.authService.authenticateUser(loginData as LoginCredentials).subscribe({
+      next: (response) => {
+        console.log('response', response);
+      },
+      error: (error) => {
+        console.error('Authentication error', error);
+      }
+    })
   }
 }

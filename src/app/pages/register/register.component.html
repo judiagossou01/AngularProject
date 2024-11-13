@@ -1,5 +1,5 @@
 <h1>Register Form</h1>
-<form [formGroup]="registerForm" (submit)="submit($event)">
+<form [formGroup]="registerFormGroup" (submit)="save()">
   <div>
     <input type="text" placeholder="Name" formControlName="name">
   </div>

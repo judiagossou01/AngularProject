@@ -12,14 +12,18 @@ import {FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms';
 export class RegisterComponent {
   fb = inject(FormBuilder);
 
-  form = this.fb.nonNullable.group({
+  registerFormGroup = this.fb.nonNullable.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
     password: ['', Validators.required]
   });
 
-  submit(event: Event) {
-    event.preventDefault();
-    console.log(this.form.value);
+  save() {
+    this.registerFormGroup.markAllAsTouched()
+    if(this.registerFormGroup.invalid) {
+      return;
+    }
+    
+    console.log(this.registerFormGroup.value);
   }
 }
